@@ -1,5 +1,6 @@
 import './App.css';
 import DisplayTable from './components/DisplayTable';
+import GitUserCard from './components/GitUserCard';
 import Profile from "./components/Profile"
 import logo from "./logo.jpg"
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
      <Profile />
+     <GitUserCard />
     </div>
   );
 }

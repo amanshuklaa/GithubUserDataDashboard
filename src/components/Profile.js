@@ -6,7 +6,7 @@ const Profile = ()=>{
     const [data,setData] = useState({})
     const [username, setUserName] = useState("")
     const [repositories,setRepositories] = useState([])
-
+    const [displayTable,setDisplayTable] = useState(false)
     const handleUserNameChange = (e)=>{
         let repoName = e.target.value;
         setUserName(repoName)
@@ -16,14 +16,17 @@ const Profile = ()=>{
         e.preventDefault();
         const profile = await fetch(`https://api.github.com/users/${username}`);
         const profileJson = await profile.json();
-        // console.log(profileJson);
+        console.log(profileJson);
     
         const repositories = await fetch(profileJson.repos_url);
         const repoJson = await repositories.json();
-        // console.log(repoJson);
+        console.log(repoJson);
         if(profileJson){
+            setDisplayTable(true)
             setData(profileJson)
             setRepositories(repoJson)
+        }else{
+            setDisplayTable(false)
         }
     }
     return (
@@ -47,7 +50,8 @@ const Profile = ()=>{
                 Search
 
             </button>
-            <DisplayTable data={data} repositories={repositories}/>
+          {displayTable ?
+            <DisplayTable data={data} repositories={repositories}/>:""}
             </div>
         </div>
         </>
